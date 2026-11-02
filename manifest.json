@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "FUO Image Magnifier",
+  "version": "4.0.0",
+  "description": "Chọn vùng, phóng to, kéo di chuyển và resize khung hiển thị.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://fuoverflow.com/*",
+    "https://*.fuoverflow.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://fuoverflow.com/*",
+        "https://*.fuoverflow.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "FUO Image Magnifier",
+    "default_popup": "popup.html"
+  }
+}
