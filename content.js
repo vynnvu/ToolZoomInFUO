@@ -52,9 +52,11 @@
     grip.addEventListener('pointercancel',finishResize);
     
     let drag=null;
-    header.addEventListener('pointerdown',e=>{if(e.target===close)return;drag={x:e.clientX,y:e.clientY,left:panel.offsetLeft,top:panel.offsetTop};header.setPointerCapture(e.pointerId);});
-    header.addEventListener('pointermove',e=>{if(!drag)return;panel.style.left=`${clamp(drag.left+e.clientX-drag.x,0,innerWidth-120)}px`;panel.style.top=`${clamp(drag.top+e.clientY-drag.y,0,innerHeight-70)}px`;panel.dataset.moved='1';});
-    header.addEventListener('pointerup',()=>drag=null);
+    body.addEventListener('pointerdown',e=>{if(e.button!==0)return;drag={x:e.clientX,y:e.clientY,left:panel.offsetLeft,top:panel.offsetTop};body.setPointerCapture(e.pointerId);body.classList.add('fuo-is-dragging');});
+    body.addEventListener('pointermove',e=>{if(!drag)return;panel.style.left=`${clamp(drag.left+e.clientX-drag.x,0,innerWidth-120)}px`;panel.style.top=`${clamp(drag.top+e.clientY-drag.y,0,innerHeight-70)}px`;panel.dataset.moved='1';});
+    function finishDrag(){drag=null;body.classList.remove('fuo-is-dragging');}
+    body.addEventListener('pointerup',finishDrag);
+    body.addEventListener('pointercancel',finishDrag);
     refresh(true);
   }
   function applyPanelSize(){if(!panel)return;const d=s.panelSize||defaults.panelSize;panel.style.width=`${clamp(d.w,280,Math.max(280,innerWidth-16))}px`;panel.style.height=`${clamp(d.h,130,Math.max(130,innerHeight-16))}px`;}
