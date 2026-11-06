@@ -1,4 +1,4 @@
-# FUO Image Magnifier v4
+# FUO Image Magnifier
 
 ## Cài đặt
 1. Giải nén file ZIP.
